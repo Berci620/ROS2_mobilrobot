@@ -1,3 +1,0 @@
-[console_scripts]
-turtlebot_controller = ros2_course.turtlebot_controller:main
-

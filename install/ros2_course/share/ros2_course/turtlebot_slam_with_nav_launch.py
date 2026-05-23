@@ -1,1 +1,0 @@
-/home/berci/ros2_ws/build/ros2_course/launch/turtlebot_slam_with_nav_launch.py

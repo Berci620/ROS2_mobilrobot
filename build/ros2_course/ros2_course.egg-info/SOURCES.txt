@@ -3,7 +3,7 @@ setup.cfg
 setup.py
 resource/ros2_course
 ros2_course/__init__.py
-ros2_course/hello.py
+ros2_course/turtlebot_controller.py
 ros2_course.egg-info/PKG-INFO
 ros2_course.egg-info/SOURCES.txt
 ros2_course.egg-info/dependency_links.txt

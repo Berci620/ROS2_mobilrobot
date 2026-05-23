@@ -1,0 +1,17 @@
+[0.680s] Invoking command in '/home/berci/ros2_ws/build/ros2_course': PYTHONPATH=/home/berci/ros2_ws/build/ros2_course/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/berci/ros2_ws/install/ros2_course/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/berci/ros2_ws/build/ros2_course/build --no-deps symlink_data
+[0.935s] running develop
+[1.111s] running egg_info
+[1.111s] writing ros2_course.egg-info/PKG-INFO
+[1.111s] writing dependency_links to ros2_course.egg-info/dependency_links.txt
+[1.111s] writing entry points to ros2_course.egg-info/entry_points.txt
+[1.112s] writing requirements to ros2_course.egg-info/requires.txt
+[1.112s] writing top-level names to ros2_course.egg-info/top_level.txt
+[1.113s] reading manifest file 'ros2_course.egg-info/SOURCES.txt'
+[1.114s] writing manifest file 'ros2_course.egg-info/SOURCES.txt'
+[1.115s] running build_ext
+[1.115s] Creating /home/berci/ros2_ws/install/ros2_course/lib/python3.10/site-packages/ros2-course.egg-link (link to .)
+[1.116s] Installing turtlebot_controller script to /home/berci/ros2_ws/install/ros2_course/lib/ros2_course
+[1.116s] 
+[1.117s] Installed /home/berci/ros2_ws/build/ros2_course
+[1.117s] running symlink_data
+[1.139s] Invoked command in '/home/berci/ros2_ws/build/ros2_course' returned '0': PYTHONPATH=/home/berci/ros2_ws/build/ros2_course/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/berci/ros2_ws/install/ros2_course/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/berci/ros2_ws/build/ros2_course/build --no-deps symlink_data

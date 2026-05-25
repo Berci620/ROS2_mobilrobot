@@ -31,6 +31,7 @@ setup(
         'console_scripts': [
             'turtlebot_controller = ros2_course.turtlebot_controller:main',
             'turtlebot_closest_point = ros2_course.turtlebot_closest_point:main',
+            'turtlebot_follow_wall = ros2_course.turtlebot_follow_wall:main',
         ],
     },
 )

@@ -29,7 +29,8 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'turtlebot_controller = ros2_course.turtlebot_controller:main'
+            'turtlebot_controller = ros2_course.turtlebot_controller:main',
+            'turtlebot_closest_point = ros2_course.turtlebot_closest_point:main',
         ],
     },
 )

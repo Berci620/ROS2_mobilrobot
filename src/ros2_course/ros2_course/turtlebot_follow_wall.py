@@ -12,15 +12,17 @@ class FollowWall(Node):
         self.desired_distance = desired_distance
         self.desired_speed = desired_speed
         
-        # PID State Variables
+        # PD State Variables
         self.prev_error = 0.0
-        self.integral = 0.0
         self.last_time = time.time()
         
         # Physical Limits
         self.max_angular_vel = 1.0  # Maximum allowed turning speed (rad/s)
         
+        # Linear + Angular velocity publisher
         self.twist_pub = self.create_publisher(Twist, '/cmd_vel', 10)
+
+        # Closest point subscriber
         self.subscription = self.create_subscription(
             Float32, '/closest_point', self.cb_calc_angular_vel, 10)
 
@@ -34,36 +36,26 @@ class FollowWall(Node):
         self.get_logger().info(f'-------------------------------------------------------------- ')
         self.get_logger().info(f'Error: {error:.2f}, Distance: {msg.data:.2f}')
         
-        # 1. Gain Scheduling (Asymmetric reactions)
+        # Gain Scheduling (Asymmetric reactions)
         if error > 0:
             # TOO CLOSE: Aggressive gains to avoid crashing
             Kp = 1.65
-            Ki = -0.0
             Kd = 1.5
         else:
-            # TOO FAR: Smoother, relaxed gains to slowly return to the wall
+            # TOO FAR: Smaller gains to slowly return to the wall
             Kp = 0.9
-            Ki = -0.0
             Kd = 1.5
 
-        # 2. Standard PID Math (using true time 'dt')
+        # PD Math (with time 'dt')
         proportional = Kp * error
         derivative = Kd * ((error - self.prev_error) / dt)
         
-        # Calculate tentative output for anti-windup check
-        raw_angular = proportional + (Ki * (self.integral + error * dt)) + derivative
-        
-        # Anti-Windup: Only accumulate integral if we aren't already at max turning speed
-        if -self.max_angular_vel <= raw_angular <= self.max_angular_vel:
-            self.integral += error * dt
-            
-        integral_term = Ki * self.integral
 
-        # Final PID Output
-        final_angular = proportional + integral_term + derivative
+        # Final PD Output
+        final_angular = proportional + derivative
 
-        # 3. Hard Clamping the Output
-        # This guarantees the robot never exceeds your set maximum turning speed
+        # Hard Controlling the Output to Max Limits
+        # This guarantees the robot never exceeds the set maximum turning speed
         safe_angular = max(-self.max_angular_vel, min(self.max_angular_vel, final_angular))
 
         self.prev_error = error
@@ -74,7 +66,7 @@ class FollowWall(Node):
     def go(self, angular_vel):
         vel_msg = Twist()
         
-        # 4. Dynamic Linear Velocity Scaling
+        # Dynamic Linear Velocity Scaling
         # If turning sharply, slow down the forward speed. 
         # If driving straight (angular_vel ~ 0), drive at desired_speed.
         speed_penalty = abs(angular_vel) * 1.8

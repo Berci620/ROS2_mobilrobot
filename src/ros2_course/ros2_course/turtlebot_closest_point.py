@@ -26,7 +26,9 @@ class TurtlebotClosestPoint(Node):
 
     def scan_callback(self, msg):
         # Process the laser scan data
-        self.closest_point = min(msg.ranges)
+        right_side_ranges = msg.ranges[0:320]
+        self.get_logger().info(f'Length of ranges: {len(msg.ranges)}')
+        self.closest_point = min(right_side_ranges)
         if self.closest_point is not None:
             self.pub.publish(Float32(data=self.closest_point))
         
